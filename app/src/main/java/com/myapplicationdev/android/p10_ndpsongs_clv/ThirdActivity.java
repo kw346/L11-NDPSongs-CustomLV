@@ -44,7 +44,7 @@ public class ThirdActivity extends AppCompatActivity {
         etTitle.setText(currentSong.getTitle());
         etSingers.setText(currentSong.getSingers());
         etYear.setText(currentSong.getYearReleased()+"");
-        int rating = (int) rb3.getRating();
+        rb3.setRating(currentSong.getStars());
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,17 +52,19 @@ public class ThirdActivity extends AppCompatActivity {
                 DBHelper dbh = new DBHelper(ThirdActivity.this);
                 currentSong.setTitle(etTitle.getText().toString().trim());
                 currentSong.setSingers(etSingers.getText().toString().trim());
+
                 int year = 0;
-                int rating = 0;
+
                 try {
                     year = Integer.valueOf(etYear.getText().toString().trim());
                 } catch (Exception e){
                     Toast.makeText(ThirdActivity.this, "Invalid year", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 currentSong.setYearReleased(year);
 
-                currentSong.setStars(rating);
+                currentSong.setStars((int) rb3.getRating());
                 int result = dbh.updateSong(currentSong);
                 if (result>0){
                     Toast.makeText(ThirdActivity.this, "Song updated", Toast.LENGTH_SHORT).show();

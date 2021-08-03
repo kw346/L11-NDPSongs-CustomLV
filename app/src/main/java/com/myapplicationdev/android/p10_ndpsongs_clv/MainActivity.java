@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     etTitle.setText("");
                     etSingers.setText("");
                     etYear.setText("");
-                    rating = 0;
+                    rb.setRating(0);
                 } else {
                     Toast.makeText(MainActivity.this, "Insert failed", Toast.LENGTH_LONG).show();
                 }
